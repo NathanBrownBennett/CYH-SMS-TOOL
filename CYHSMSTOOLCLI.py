@@ -1,5 +1,6 @@
 import sys
 
+
 # Simulate a database with user credentials and poll responses
 users = {
     'mr.user@email.com': '7310289491',
