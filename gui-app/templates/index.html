@@ -2,12 +2,107 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CYH SMS Tool</title>
+    <title>CYH SMS Tool Chat</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+        }
+        .chat-container {
+            flex-grow: 1;
+            padding: 10px;
+            display: flex;
+            flex-direction: column-reverse;
+            overflow: auto;
+            background-color: #f7f7f7;
+        }
+        .message-input {
+            display: flex;
+            margin: 10px;
+        }
+        .message-input input {
+            flex-grow: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 20px;
+            margin-right: 10px;
+        }
+        .message-input button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            background-color: #5aac44;
+            color: white;
+            cursor: pointer;
+        }
+        .message {
+            max-width: 60%;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: 20px;
+            color: white;
+            line-height: 1.4;
+        }
+        .message.sent {
+            align-self: flex-end;
+            background-color: #5aac44;
+        }
+        .message.received {
+            align-self: flex-start;
+            background-color: #ccc;
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to the CYH SMS Tool Interface</h1>
-    <p>Please log in to continue.</p>
-    <a href="{{ url_for('login') }}">Login</a>
+    <section class="chat-container" id="chatContainer">
+        <div class="chat-header">
+            <h3>Chatting with CYH SMS Toolkit</h3>
+        </div>
+    </section>
+    <div class="message-input">
+        <input type="text" id="messageInput" placeholder="Write a message...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+
+    <script>
+        function sendMessage() {
+            var input = document.getElementById('messageInput');
+            var message = input.value.trim();
+            if (message) {
+                // Display the message in a green bubble
+                var chatContainer = document.getElementById('chatContainer');
+                var msgElement = createBubbleElement(message, 'sent');
+                chatContainer.insertBefore(msgElement, chatContainer.firstChild);
+        
+                // Send the message to the Flask backend using AJAX
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', '/send_message', true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        var reply = JSON.parse(xhr.responseText).reply;
+                        var replyElement = createBubbleElement(reply, 'received');
+                        chatContainer.insertBefore(replyElement, chatContainer.firstChild);
+                    }
+                };
+                xhr.send(JSON.stringify({ message: message }));
+        
+                // Clear the input field
+                input.value = '';
+            }
+        }
+        
+        function createBubbleElement(text, className) {
+            var bubble = document.createElement('div');
+            bubble.classList.add('message', className);
+            bubble.textContent = text;
+            return bubble;
+        }
+    </script>
 </body>
 </html>
