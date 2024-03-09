@@ -1,20 +1,34 @@
 # CYH-SMS-TOOL
 
-To run the code, follow these instructions:
+# CYH-SMS-TOOL
 
-Make sure you have Python installed on your system.
+## Running the Executable
 
-Open a terminal or command prompt.
+For Windows users, you can run the pre-built executable without needing to install Python. Follow these steps:
 
-Navigate to the directory where the README.md file and the Python script are located. In this case, it is /Users/NathanBrownBennett/CYH SMS TOOL/CYH-SMS-TOOL/.
+1. Navigate to the directory containing the `backend.exe` file. If you've followed the packaging process, it should be located in the `dist` folder within your project directory.
+   
+2. Double-click on `backend.exe` to start the application. Alternatively, you can also run it from the command prompt by navigating to the `dist` directory and entering `backend.exe`.
 
-Run the following command to execute the Python script:
+3. The application will start running and prompt you with a menu. Follow the instructions provided by the application to interact with it.
 
-py
-Replace your_script_name.py with the actual name of your Python script file.
+4. To exit the application, choose the option to log out when prompted or simply close the command prompt window.
 
-The application will start running and prompt you with a menu. Follow the instructions provided by the application to interact with it.
+## Running the Code (For Development)
 
-To exit the application, choose the option to log out when prompted.
+To run the code from the source in a development environment, follow these instructions:
+
+1. Make sure you have Python installed on your system.
+
+2. Open a terminal or command prompt.
+
+3. Navigate to the directory where the `README.md` file and the Python script are located. In this case, it is `/Users/NathanBrownBennett/CYH SMS TOOL/CYH-SMS-TOOL/`.
+
+4. Run the following command to execute the Python script:
+py backend.py
+
+5. The application will start running and prompt you with a menu. Follow the instructions provided by the application to interact with it.
+
+6. To exit the application, choose the option to log out when prompted.
 
 That's it! You have successfully run the code.
